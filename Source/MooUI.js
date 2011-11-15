@@ -1,0 +1,1 @@
+this.MooUI = this.MooUI || {version: '0.1'};
