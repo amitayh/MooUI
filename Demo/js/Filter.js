@@ -4,7 +4,7 @@ var Filter = new Class({
 
     options: {
         template: new MooUI.Template(
-            '<select class="filter-field" name="<%= name %>[field]"></select>' +
+            '<select class="filter-field" name="<%= name %>[field]"></select> ' +
             '<div class="filter-widget"></div>'
         ),
         events: {
@@ -37,10 +37,9 @@ var Filter = new Class({
     onFieldChange: function() {
         var fieldName = this.field.get('value'),
             field = this.fields[fieldName],
-            widgetClass;
-        widgetClass = Filter.GetWidget(fieldName, field.type);
+            widgetClass = Filter.GetWidget(fieldName, field.type);
         this.destroyWidget();
-        this.widget = new widgetClass(this.name, field, {inject: this.filterContainer});
+        this.widget = new widgetClass(this, {inject: this.filterContainer});
         this.fireEvent('fieldChange');
     },
 
@@ -106,3 +105,17 @@ Filter.GetWidget = function(fieldName, type) {
             return Filter.Widget.String;
     }
 };
+
+Element.implement({
+    select: function(value) {
+        value = value.toString();
+        var option = this.getChildren().filter(function(el) {
+            return el.get('value') == value;
+        });
+        if (option.length) {
+            option[0].set('selected', true);
+            return true;
+        }
+        return false;
+    }
+});

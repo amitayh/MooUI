@@ -4,7 +4,7 @@ Filter.Widget.Default = new Class({
 
     options: {
         template: new MooUI.Template(
-            '<select class="filter-widget-operator" name="<%= name %>[operator]"></select>' +
+            '<select class="filter-widget-operator" name="<%= name %>[operator]"></select> ' +
             '<div class="filter-widget-value"></div>'
         ),
         events: {
@@ -34,7 +34,7 @@ Filter.Widget.Default = new Class({
     onOperatorChange: function() {
         var operator = this.operator.get('value').toInt(),
             values = this.value.getElements('input').get('value'),
-            context = {name: this.name, values: values},
+            context = {name: this.filter.name + '[value]', values: values},
             template = Filter.Widget.Default.Values[operator];
         this.value.set('html', template.render(context));
         this.fireEvent('operatorChange');

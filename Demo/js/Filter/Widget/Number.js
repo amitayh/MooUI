@@ -13,6 +13,11 @@ Filter.Widget.Number = new Class({
             {value: Filter.Operator.Between, html: 'between'},
             {value: Filter.Operator.NotBetween, html: 'not between'}
         ]
+    },
+
+    onOperatorChange: function() {
+        this.parent();
+        this.value.getElements('input').addClass('number');
     }
 
 });

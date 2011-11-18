@@ -6,7 +6,7 @@ var FilterList = new Class({
         template:
             '<div class="list-container"></div>' +
             '<p>' +
-                '<input type="button" class="add-filter" value="Add filter" /> | ' +
+                '<input type="button" class="add-filter" value="+ Add filter" /> | ' +
                 '<input type="button" class="clear-filters" value="Clear filters" disabled="disabled" />' +
             '</p>',
         events: {
@@ -31,7 +31,9 @@ var FilterList = new Class({
         this.list = new MooUI.List({inject: this.listContainer});
 
         var checkClearButton = function() {
-            this.clearFiltersButton.set('disabled', !this.list.items.length);
+            var items = this.list.items.length;
+            this.clearFiltersButton.set('disabled', !items);
+            $(this.list)[items ? 'addClass' : 'removeClass']('has-items');
         }.bind(this);
         
         this.list.addEvents({
