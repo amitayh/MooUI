@@ -3,7 +3,7 @@ MooUI.Component = new Class({
     Implements: [Options, Events],
 
     options: {
-        tagName: 'div.mooui-component',
+        tag: 'div.mooui-component',
         attributes: {},
         events: {},
         bind: {},
@@ -41,7 +41,7 @@ MooUI.Component = new Class({
 
     createElement: function() {
         var tpl = this.options.template, html;
-        this.el = new Element(this.options.tagName, this.options.attributes);
+        this.el = new Element(this.options.tag, this.options.attributes);
         if (tpl) {
             html = instanceOf(tpl, MooUI.Template) ? tpl.render(this) : tpl;
             this.el.set('html', html);
@@ -50,12 +50,12 @@ MooUI.Component = new Class({
 
     delegateEvents: function() {
         Object.each(this.options.events, function(callback, event) {
-            var parts = event.split(' '), type = parts.shift();
-            if (parts.length) {
-                // Use event delegation
-                type += ':relay(' + parts.join(' ') + ')';
-            }
             if (this[callback]) {
+                var parts = event.split(' '), type = parts.shift();
+                if (parts.length) {
+                    // Use event delegation
+                    type += ':relay(' + parts.join(' ') + ')';
+                }
                 this.el.addEvent(type, this[callback].bind(this));
             }
         }, this);
@@ -63,9 +63,9 @@ MooUI.Component = new Class({
 
     bindElements: function() {
         Object.each(this.options.bind, function(property, selector) {
-            var el = this.el.getElement(selector);
-            if (el) {
-                this[property] = el;
+            var el = this.el.getElements(selector), length = el.length;
+            if (length) {
+                this[property] = (length == 1) ? el[0] : el;
             }
         }, this);
     },

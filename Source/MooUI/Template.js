@@ -1,6 +1,6 @@
 /**
- * Simple JavaScript Templating
- * John Resig - http://ejohn.org/ - MIT Licensed
+ * Parts of this code were copied or inspired by
+ * John Resig's simple javasciprt templating - http://ejohn.org/
  */
 MooUI.Template = new Class({
 
@@ -41,7 +41,7 @@ MooUI.Template = new Class({
 
         /**
          * Generate a reusable function that will serve as a template
-         * generator (and which will be cached).
+         * generator (and which will be cached)
          */
         this.compiled = new Function('obj',
             "var p=[];with(obj){p.push('" +
