@@ -1,0 +1,46 @@
+var FilterList = new Class({
+
+    Extends: MooUI.List,
+
+    options: {
+        template:
+            '<div class="list-container"></div>' +
+            '<p>' +
+                '<input type="button" class="add-filter" value="Add filter" /> | ' +
+                '<input type="button" class="clear-filters" value="Clear filters" disabled="disabled" />' +
+            '</p>',
+        events: {
+            'click .add-filter': 'addFilter',
+            'click .clear-filters': 'clearFilters'
+        },
+        bind: {
+            '.list-container': 'listContainer',
+            '.clear-filters': 'clearFiltersButton'
+        }
+    },
+
+    filters: 0,
+
+    initialize: function(name, options) {
+        this.name = name;
+        this.parent(options);
+
+        this.list = new MooUI.List({inject: this.listContainer});
+
+        var checkClearButton = function() {
+            this.clearFiltersButton.set('disabled', !this.list.items.length);
+        }.bind(this);
+        this.list.addEvents({
+            addItem: checkClearButton,
+            removeItem: checkClearButton
+        });
+    },
+
+    addFilter: function() {
+        var id = this.filters++,
+            name = this.name + '[' + id + ']',
+            item = new FilterList.Item(name);
+        this.list.addItem(item);
+    }
+
+});
