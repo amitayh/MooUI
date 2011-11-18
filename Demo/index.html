@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8" />
+        <link rel="stylesheet" media="screen" href="css/index.css" />
+        <title>MooUI Demo</title>
+    </head>
+    <body>
+        <h1>Filter results</h1>
+
+        <!-- MooTools -->
+        <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/mootools/1.4.1/mootools-yui-compressed.js"></script>
+
+        <!-- MooUI Classes -->
+        <script type="text/javascript" src="../Source/MooUI.js"></script>
+        <script type="text/javascript" src="../Source/MooUI/Component.js"></script>
+        <script type="text/javascript" src="../Source/MooUI/Template.js"></script>
+        <script type="text/javascript" src="../Source/MooUI/List.js"></script>
+        <script type="text/javascript" src="../Source/MooUI/List/Item.js"></script>
+
+        <!-- UI Components -->
+        <script type="text/javascript" src="js/FilterList.js"></script>
+        <script type="text/javascript" src="js/FilterList/Item.js"></script>
+        <script type="text/javascript" src="js/Filter.js"></script>
+        <script type="text/javascript" src="js/Filter/Widget.js"></script>
+        <script type="text/javascript" src="js/Filter/Widget/Default.js"></script>
+        <script type="text/javascript" src="js/Filter/Widget/Number.js"></script>
+        <script type="text/javascript" src="js/Filter/Widget/Date.js"></script>
+        <script type="text/javascript" src="js/Filter/Widget/Boolean.js"></script>
+        <script type="text/javascript" src="js/Filter/Widget/String.js"></script>
+
+        <!-- Implementation Script -->
+        <script type="text/javascript">
+            <!--
+
+            window.addEvent('domready', function() {
+
+                // Define your fields
+                var fields = {
+                    string: {name: 'Name', type: Filter.FieldType.String},
+                    number: {name: 'Age', type: Filter.FieldType.Integer},
+                    date: {name: 'Date of birth', type: Filter.FieldType.Date},
+                    bool: {name: 'Married', type: Filter.FieldType.Boolean}
+                };
+
+                // Create the filters list
+                new FilterList('filters', {
+                    itemOptions: {fields: fields},
+                    inject: $(document.body)
+                });
+
+            });
+
+            //-->
+        </script>
+    </body>
+</html>
