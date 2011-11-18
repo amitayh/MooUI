@@ -18,7 +18,7 @@ MooUI.List = new Class({
     addItem: function(item) {
         item.list = this;
         this.items.push(item);
-        $(item).inject(this.el);
+        document.id(item).inject(this.el);
         this.fireEvent('addItem', item);
         return this;
     },
