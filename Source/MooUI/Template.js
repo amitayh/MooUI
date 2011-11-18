@@ -10,29 +10,29 @@ MooUI.Template = new Class({
         autoescape: true
     },
 
-	template: null,
+    template: null,
 
-	compiled: null,
-	
-	initialize: function(template, options) {
+    compiled: null,
+    
+    initialize: function(template, options) {
         this.setOptions(options);
-		this.template = template;
-	},
+        this.template = template;
+    },
 
-	render: function(context) {
-		if (!this.compiled) {
-			this.compile();
-		}
-		return this.compiled(context || {});
-	},
+    render: function(context) {
+        if (!this.compiled) {
+            this.compile();
+        }
+        return this.compiled(context || {});
+    },
 
-	compile: function() {
-		var template = this.template, modifier = '';
+    compile: function() {
+        var template = this.template, modifier = '';
 
         // Figure out the template string
-		if (typeOf(template) == 'element') {
-			template = template.get('html');
-		}
+        if (typeOf(template) == 'element') {
+            template = template.get('html');
+        }
 
         // Handle auto escape
         if (this.options.autoescape) {
@@ -43,19 +43,19 @@ MooUI.Template = new Class({
          * Generate a reusable function that will serve as a template
          * generator (and which will be cached).
          */
-		this.compiled = new Function('obj',
-			"var p=[];with(obj){p.push('" +
-			template
-				.replace(/[\r\t\n]/g, ' ')
-				.split('<%').join('\t')
-				.replace(/((^|%>)[^\t]*)'/g, '$1\r')
-				.replace(/\t=\s*?(\S*?)\s*?%>/g, "',($1!=undefined?$1" + modifier + ":''),'")
-				.split('\t').join("');")
-				.split('%>').join("p.push('")
-				.split('\r').join("\\'") +
-			"');}return p.join('');"
-		);
-	}
+        this.compiled = new Function('obj',
+            "var p=[];with(obj){p.push('" +
+            template
+                .replace(/[\r\t\n]/g, ' ')
+                .split('<%').join('\t')
+                .replace(/((^|%>)[^\t]*)'/g, '$1\r')
+                .replace(/\t=\s*?(\S*?)\s*?%>/g, "',($1!=undefined?$1" + modifier + ":''),'")
+                .split('\t').join("');")
+                .split('%>').join("p.push('")
+                .split('\r').join("\\'") +
+            "');}return p.join('');"
+        );
+    }
 
 });
 
