@@ -1,6 +1,6 @@
 var FilterList = new Class({
 
-    Extends: MooUI.List,
+    Extends: MooUI.Component,
 
     options: {
         template:
@@ -16,7 +16,8 @@ var FilterList = new Class({
         bind: {
             '.list-container': 'listContainer',
             '.clear-filters': 'clearFiltersButton'
-        }
+        },
+        itemOptions: {}
     },
 
     filters: 0,
@@ -25,11 +26,14 @@ var FilterList = new Class({
         this.name = name;
         this.parent(options);
 
+        this.el.addClass('filter-list');
+
         this.list = new MooUI.List({inject: this.listContainer});
 
         var checkClearButton = function() {
             this.clearFiltersButton.set('disabled', !this.list.items.length);
         }.bind(this);
+        
         this.list.addEvents({
             addItem: checkClearButton,
             removeItem: checkClearButton
@@ -39,8 +43,12 @@ var FilterList = new Class({
     addFilter: function() {
         var id = this.filters++,
             name = this.name + '[' + id + ']',
-            item = new FilterList.Item(name);
+            item = new FilterList.Item(name, this.options.itemOptions);
         this.list.addItem(item);
+    },
+
+    clearFilters: function() {
+        this.list.clearItems();
     }
 
 });
