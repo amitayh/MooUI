@@ -45,7 +45,8 @@ var FilterList = new Class({
     addFilter: function() {
         var id = this.filters++,
             name = this.name + '[' + id + ']',
-            item = new FilterList.Item(name, this.options.itemOptions);
+            options = Object.merge(this.options.itemOptions, {name: name}),
+            item = new FilterList.Item(options);
         this.list.addItem(item);
     },
 
