@@ -1,3 +1,22 @@
+/*
+---
+
+description: Base list component
+
+license: MIT-style
+
+authors:
+- Amitay Horwitz
+
+requires:
+- MooUI
+
+provides:
+- MooUI.List
+
+...
+*/
+
 MooUI.List = new Class({
 
     Extends: MooUI.Component,
