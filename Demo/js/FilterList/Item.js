@@ -5,12 +5,12 @@ FilterList.Item = new Class({
     options: {
         template:
             '<input class="remove-filter" type="button" value="X" title="Remove" />' +
-        	'<div class="filter"></div>',
+            '<div class="filter"></div>',
         events: {
-        	'click .remove-filter': 'removeFilter',
+            'click .remove-filter': 'removeFilter',
         },
         bind: {
-        	'.filter': ['filter', function(el) {
+            '.filter': ['filter', function(el) {
                 return new Filter(this.options.name, this.options.fields, {replaces: el});
             }]
         },
@@ -24,7 +24,7 @@ FilterList.Item = new Class({
     },
 
     removeFilter: function() {
-    	this.list.removeItem(this);
+        this.list.removeItem(this);
     },
 
     destroy: function() {

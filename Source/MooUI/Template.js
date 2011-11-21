@@ -1,7 +1,25 @@
-/**
- * Parts of this code were copied or inspired by
- * John Resig's simple javasciprt templating - http://ejohn.org/
- */
+/*
+---
+
+description: Simple templating class
+
+inspiration: Parts of this code were copied or inspired by John Resig's simple javasciprt templating - http://ejohn.org/
+
+license: MIT-style
+
+authors:
+- Amitay Horwitz
+- John Resig
+
+requires:
+- MooUI
+
+provides:
+- MooUI.Template
+
+...
+*/
+
 MooUI.Template = new Class({
 
     Implements: Options,

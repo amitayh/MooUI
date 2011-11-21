@@ -1,3 +1,22 @@
+/*
+---
+
+description: Base UI component class
+
+license: MIT-style
+
+authors:
+- Amitay Horwitz
+
+requires:
+- MooUI
+
+provides:
+- MooUI.Component
+
+...
+*/
+
 MooUI.Component = new Class({
 
     Implements: [Options, Events],
