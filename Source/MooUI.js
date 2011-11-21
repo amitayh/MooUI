@@ -3,6 +3,8 @@
 
 description: Defines the MooUI namespace
 
+inspiration: Parts of this code were inspired by backbone.js, Dijit and ExtJS
+
 license: MIT-style
 
 authors:
