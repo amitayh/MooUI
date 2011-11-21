@@ -39,7 +39,6 @@ input[type=button] {
 .filter-list-item .remove-filter {
     float: right;
 }
-.filter-list-item .filter-container,
 .filter-list-item .filter-widget,
 .filter-list-item .filter-widget-value {
     display: inline-block;

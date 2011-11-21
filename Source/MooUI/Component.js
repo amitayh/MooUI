@@ -7,9 +7,7 @@ MooUI.Component = new Class({
         attributes: {},
         events: {},
         bind: {},
-        template: null,
-        adopt: null,
-        inject: null
+        template: null
     },
 
     el: null,
@@ -30,12 +28,11 @@ MooUI.Component = new Class({
         this.createElement();
         this.delegateEvents();
         this.bindElements();
-        if (this.options.adopt) {
-            this.el.adopt(this.options.adopt);
-        }
-        if (this.options.inject) {
-            this.el.inject(this.options.inject);
-        }
+        Object.each(this.options, function(value, name) {
+            if (Element.prototype[name]) {
+                this.el[name](value);
+            }
+        }, this);
         this.fireEvent('render');
     },
 
@@ -62,10 +59,16 @@ MooUI.Component = new Class({
     },
 
     bindElements: function() {
-        Object.each(this.options.bind, function(property, selector) {
-            var el = this.el.getElements(selector), length = el.length;
-            if (length) {
-                this[property] = (length == 1) ? el[0] : el;
+        Object.each(this.options.bind, function(options, selector) {
+            var el = this.el.getElements(selector), count = el.length, name, property;
+            if (count) {
+                options = Array.from(options);
+                name = options[0];
+                property = (count == 1) ? el[0] : el;
+                if (options[1] && typeOf(options[1]) == 'function') {
+                    property = options[1].call(this, property);
+                }
+                this[name] = property;
             }
         }, this);
     },
@@ -74,5 +77,5 @@ MooUI.Component = new Class({
         this.el.destroy();
         this.fireEvent('destroy');
     }
-    
+
 });
