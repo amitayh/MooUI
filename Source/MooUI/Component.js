@@ -48,8 +48,9 @@ MooUI.Component = new Class({
         this.delegateEvents();
         this.bindElements();
         Object.each(this.options, function(value, name) {
-            if (Element.prototype[name]) {
-                this.el[name](value);
+            var prop = this.el[name];
+            if (prop && typeOf(prop) == 'function') {
+                prop.call(this.el, value);
             }
         }, this);
         this.fireEvent('render');
