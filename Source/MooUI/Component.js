@@ -67,13 +67,16 @@ MooUI.Component = new Class({
 
     delegateEvents: function() {
         Object.each(this.options.events, function(callback, event) {
-            if (this[callback]) {
+            if (typeOf(callback) == 'string') {
+                callback = this[callback];
+            }
+            if (typeOf(callback) == 'function') {
                 var parts = event.split(' '), type = parts.shift();
                 if (parts.length) {
                     // Use event delegation
                     type += ':relay(' + parts.join(' ') + ')';
                 }
-                this.el.addEvent(type, this[callback].bind(this));
+                this.el.addEvent(type, callback.bind(this));
             }
         }, this);
     },
