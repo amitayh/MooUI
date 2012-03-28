@@ -4,7 +4,7 @@ FilterList.Item = new Class({
 
     options: {
         template:
-            '<input class="remove-filter" type="button" value="X" title="Remove" />' +
+            '<input class="remove-filter" type="button" value="&times;" title="Remove" />' +
             '<div class="filter"></div>',
         events: {
             'click .remove-filter': 'removeFilter',
